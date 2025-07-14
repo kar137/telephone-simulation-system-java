@@ -2,7 +2,6 @@ package main.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class WelcomePage extends JFrame {
     public WelcomePage() {
@@ -25,12 +24,12 @@ public class WelcomePage extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         lostCallBtn.addActionListener(e -> {
-            new LostCallFrame();
+            new LostCallFrame().setVisible(true);
             dispose();
         });
 
         delayedCallBtn.addActionListener(e -> {
-            new DelayedCallFrame();
+            new DelayedCallFrame().setVisible(true);
             dispose();
         });
 

@@ -2,9 +2,9 @@ package main.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
-import model.*;
+import javax.swing.Timer;
+import main.model.*;
 
 public class DelayedCallFrame extends JFrame {
 
@@ -27,18 +27,18 @@ public class DelayedCallFrame extends JFrame {
 
         switchboard = new Switchboard(8, 3); // 8 lines, 3 connections
 
-        // Clock label
+        // Clock label at the top
         clockLabel = new JLabel("⏰ Time: 0", JLabel.CENTER);
         clockLabel.setFont(new Font("Courier New", Font.BOLD, 24));
         add(clockLabel, BorderLayout.NORTH);
 
-        // Log output
+        // Log area for simulation events
         logArea = new JTextArea();
         logArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(logArea);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Stop button
+        // Control panel with Stop button
         JPanel controlPanel = new JPanel();
         JButton stopBtn = new JButton("🛑 Stop");
         controlPanel.add(stopBtn);
@@ -46,31 +46,32 @@ public class DelayedCallFrame extends JFrame {
 
         stopBtn.addActionListener(e -> simulationTimer.stop());
 
-        // Timer-based simulation
+        // Timer triggers every 1000ms (1 second)
         simulationTimer = new Timer(1000, e -> tick());
         simulationTimer.start();
 
         setVisible(true);
     }
 
+    // Called every timer tick (every 1 second)
     private void tick() {
         currentTime++;
         clockLabel.setText("⏰ Time: " + currentTime);
 
         // Step 1: Generate a new random call
-        Call call = Call.generateRandomCall(currentTime, 4);
+        Call call = Call.generateRandomCall(currentTime, 8); // use 8 lines
         boolean success = switchboard.connectCall(call);
 
         if (success) {
             activeCalls.add(call);
             log("✅ Connected: " + call);
         } else {
-            // Push to delayed queue
+            // Add call to delayed queue with first retry scheduled after 2 units
             delayedQueue.offer(new DelayedCall(call, currentTime + 2, 1));
             log("⏳ Delayed (Try 1): " + call);
         }
 
-        // Step 2: Retry eligible delayed calls
+        // Step 2: Retry delayed calls if retry time has come
         Queue<DelayedCall> tempQueue = new LinkedList<>();
         while (!delayedQueue.isEmpty()) {
             DelayedCall delayed = delayedQueue.poll();
@@ -105,11 +106,12 @@ public class DelayedCallFrame extends JFrame {
         activeCalls.removeAll(toRemove);
     }
 
+    // Log messages to the text area with timestamp
     private void log(String msg) {
         logArea.append("[" + currentTime + "] " + msg + "\n");
     }
 
-    // Inner class for retry logic
+    // Inner class representing delayed calls with retry info
     static class DelayedCall {
         Call call;
         int retryTime;
