@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import model.*;
+import main.model.*;
 
 public class LostCallFrame extends JFrame {
 

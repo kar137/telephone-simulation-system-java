@@ -1,9 +1,10 @@
 package main;
 
-import gui.WelcomePage;
+import main.gui.WelcomePage;
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        new WelcomePage();
+        SwingUtilities.invokeLater(() -> new WelcomePage());
     }
 }
