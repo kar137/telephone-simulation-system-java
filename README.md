@@ -73,7 +73,9 @@ src/
 ## Screenshots
 
 <img width="843" height="727" alt="Image" src="https://github.com/user-attachments/assets/fd48bb9c-b3fd-4f6d-9c50-d9a4f408c109" />
+<br><br>
 <img width="1101" height="736" alt="Image" src="https://github.com/user-attachments/assets/6d1253cd-f3a1-4a18-8cd6-61f405ce8a30" />
+<br><br>
 <img width="1166" height="789" alt="Image" src="https://github.com/user-attachments/assets/cabd3b30-0419-4bb0-a976-877259b3e6a8" />
 
 ---
