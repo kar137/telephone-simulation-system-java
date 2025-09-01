@@ -1,9 +1,5 @@
 # Telephone Simulation System (Java)
 
-A departmental project for Computer Science and Engineering 
-
-**Project Report:** https://drive.google.com/file/d/10auj67BA5MGRc80B0ezojyXjdNBIaRgv/view?usp=sharing
-
 **Submitted by:** Karan Bista  
 **CRN:** 022-328
 
@@ -85,7 +81,6 @@ src/
 
 ## References
 
-- All code and logic are original for departmental submission.
 - For further details, see source files in `src/main/gui` and `src/main/model`.
 
 ---
